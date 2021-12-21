@@ -1,4 +1,4 @@
-using Documenter, Docdoc, DocumenterMarkdown
+using Documenter, Docdoc, DocumenterMarkdown, Pkg
 
 makedocs(
     doctest= false,
@@ -140,9 +140,13 @@ deploydocs(
   if ENV["RELEASE_VERSION"] == "master"
     @show "this is master"
     s = s * "-dev"
+    alias = "dev"
+    cmd = `mike deploy $s $alias`
+  else
+    cmd = `mike deploy $s $alias`
   end
-  @show `mike deploy $s`
-  make = () -> run(`mike deploy $s`),
+  @show cmd
+  make = () -> cmd,
 )
 
 #makedocs(
