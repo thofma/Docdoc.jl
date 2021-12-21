@@ -124,7 +124,7 @@ makedocs(
 #end
 
 deps = Pkg.dependencies()
-ver = Pkg.dependencies()[Base.UUID("3e1990a7-5d81-5526-99ce-9ba3ff248f21")]
+ver = Pkg.dependencies()[Base.UUID("134bd445-31a3-41a2-a80b-1808f8bd43ea")]
 
 deploydocs(
   repo = "github.com/thofma/Docdoc.jl.git",
@@ -143,7 +143,8 @@ deploydocs(
     alias = "dev"
     cmd = `mike deploy $s $alias`
   else
-    cmd = `mike deploy $s $alias`
+    @show ENV["RELEASE_VERSION"]
+    cmd = `mike deploy $s`
   end
   @show cmd
   make = () -> cmd,
