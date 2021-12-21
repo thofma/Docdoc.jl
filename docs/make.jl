@@ -123,6 +123,9 @@ makedocs(
 #  end
 #end
 
+deps = Pkg.dependencies()
+ver = Pkg.dependencies()[Base.UUID("3e1990a7-5d81-5526-99ce-9ba3ff248f21")]
+
 deploydocs(
   repo = "github.com/thofma/Docdoc.jl.git",
   deps = Deps.pip("pymdown-extensions",
@@ -133,7 +136,13 @@ deploydocs(
                   "mkdocs-cinder",
                   "mike"),
   target = "site",
-  make = () -> run(`mkdocs build`),
+  s = string(ver)
+  if ENV["RELEASE_VERSION"] == "master"
+    @show "this is master"
+    s = s * "-dev"
+  end
+  @show `mike deploy $s`
+  make = () -> run(`mike deploy $s`),
 )
 
 #makedocs(
