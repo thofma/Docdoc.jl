@@ -126,7 +126,7 @@ makedocs(
 deps = Pkg.dependencies()
 ver = Pkg.dependencies()[Base.UUID("134bd445-31a3-41a2-a80b-1808f8bd43ea")]
 
-  s = string(ver)
+  s = string(ver.version)
   if ENV["RELEASE_VERSION"] == "master"
     @show "this is master"
     s = s * "-dev"
