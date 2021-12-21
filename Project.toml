@@ -1,0 +1,4 @@
+name = "Docdoc"
+uuid = "134bd445-31a3-41a2-a80b-1808f8bd43ea"
+authors = ["Tommy Hofmann <thofma@gmail.com>"]
+version = "0.1.0"

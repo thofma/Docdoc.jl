@@ -1,0 +1,76 @@
+site_name:           'Docdoc'
+repo_name:           'Docdoc.jl'
+repo_url:            'https://github.com/thofma/Docdoc.jl'
+site_description:    'Docdoc'
+site_author:         'Tommy Hofmann'
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'blue grey'
+    accent: 'bluey grey'
+  feature:
+    tabs: true
+
+extra:
+  search:
+    tokenizer: '[\s\-\.]+'
+  social:
+    - icon: 'fontawesome/brands/github-alt'
+      link: 'https://github.com/thofma'
+  version:
+    provider: mike
+
+extra_css:
+  - 'assets/Documenter.css'
+  - 'css/extra.css'
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML
+  - assets/mathjaxhelper.js
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js
+    #- javascripts/config.js
+
+markdown_extensions:
+  - toc:
+      permalink: false
+  - extra
+  - tables
+  - fenced_code
+  - mdx_math:
+      enable_dollar_delimiter: true
+  - admonition
+  - pymdownx.highlight:
+      use_pygments: true
+      css_class: highlight
+      #guess_lang: true
+      #linenums: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        - name: flow
+          class: uml-flowchart
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: sequence
+          class: uml-sequence-diagram
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+  - pymdownx.details:
+
+docs_dir: 'build'
+
+nav:
+  - About: 'index.md'
+plugins:
+  - mike:
+      # these fields are all optional; the defaults are as below...
+      version_selector: true   # set to false to leave out the version selector
+      css_dir: css             # the directory to put the version selector's CSS
+      javascript_dir: js       # the directory to put the version selector's JS
+      canonical_version: null  # the version for <link rel="canonical">; `null`
+                               # uses the version specified via `mike deploy`
