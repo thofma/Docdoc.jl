@@ -1,4 +1,4 @@
-using Documenter, Docdoc
+using Documenter, Docdoc, Markdown
 
 makedocs(
     doctest= false,
