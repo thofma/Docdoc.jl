@@ -126,15 +126,6 @@ makedocs(
 deps = Pkg.dependencies()
 ver = Pkg.dependencies()[Base.UUID("134bd445-31a3-41a2-a80b-1808f8bd43ea")]
 
-deploydocs(
-  repo = "github.com/thofma/Docdoc.jl.git",
-  deps = Deps.pip("pymdown-extensions",
-                  "pygments",
-                  "mkdocs",
-                  "python-markdown-math",
-                  "mkdocs-material",
-                  "mkdocs-cinder",
-                  "mike"),
   target = "site",
   s = string(ver)
   if ENV["RELEASE_VERSION"] == "master"
@@ -147,7 +138,18 @@ deploydocs(
     cmd = `mike deploy $s`
   end
   @show cmd
-  make = () -> cmd,
+
+deploydocs(
+  repo = "github.com/thofma/Docdoc.jl.git",
+  deps = Deps.pip("pymdown-extensions",
+                  "pygments",
+                  "mkdocs",
+                  "python-markdown-math",
+                  "mkdocs-material",
+                  "mkdocs-cinder",
+                  "mike"),
+
+  make = () -> run(cmd),
 )
 
 #makedocs(
