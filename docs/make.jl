@@ -126,7 +126,6 @@ makedocs(
 deps = Pkg.dependencies()
 ver = Pkg.dependencies()[Base.UUID("134bd445-31a3-41a2-a80b-1808f8bd43ea")]
 
-  target = "site",
   s = string(ver)
   if ENV["RELEASE_VERSION"] == "master"
     @show "this is master"
@@ -148,7 +147,7 @@ deploydocs(
                   "mkdocs-material",
                   "mkdocs-cinder",
                   "mike"),
-
+  target = "site",
   make = () -> run(cmd),
 )
 
