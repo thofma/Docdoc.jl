@@ -4,19 +4,20 @@ function Documenter.Writers.HTMLWriter.generate_version_file(versionfile::Abstra
     @show "I am here"
     @show entries
     @show symlinks
+    @show versionfile
+    versionfile = joinpath(dirname(versionfile), "versions.json")
+    @show versionfile
     open(versionfile, "w") do buf
         symlinks = Dict(symlinks)
         isempty(entries) && return
         println(buf, "[")
         for (j, folder) in enumerate(entries)
-          print(buf, "\"version\": \"$(folder)\", \"title\": \"$(folder)\", \"aliases\": )")
+          print(buf, "{\"version\": \"$(folder)\", \"title\": \"$(folder)\", \"aliases\": ")
           print(buf, "[")
-          if haskey(symlinks, folder)
-            for (i, al) in enumerate(symlinks[folder])
-              print(buf, "\"", al, "\"")
-              if i < length(symlinks[folder])
-                print(buf, ",")
-              end
+          for (i, al) in enumerate([e for e in symlinks if e.first == folder])
+            print(buf, "\"", al.second, "\"")
+            if i < lenth([e for e in symlinks if e.first == folder])
+              print(buf, ", ")
             end
           end
           print(buf, "]}")
