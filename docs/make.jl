@@ -5,28 +5,48 @@ function Documenter.Writers.HTMLWriter.generate_version_file(versionfile::Abstra
     @show entries
     @show symlinks
     open(versionfile, "w") do buf
-        println(buf, "var DOC_VERSIONS = [")
-        for folder in entries
-            println(buf, "  \"", folder, "\",")
-        end
-        println(buf, "];")
-
-        # entries is empty if no versions have been built at all
         isempty(entries) && return
-
-        # The first element in entries corresponds to the latest version, but is usually not the full version
-        # number. So this essentially follows the symlinks that will be generated to figure out the full
-        # version number (stored in DOCUMENTER_CURRENT_VERSION in siteinfo.js).
-        # Every symlink points to a directory, so this doesn't need to be recursive.
-        newest = first(entries)
-        for s in symlinks
-            if s.first == newest
-                newest = s.second
-                break
+        println(buf, "[")
+        for (j, folder) in enumerate(entries)
+          print(buf, "\"version\": \"$(folder)\", \"title\": \"$(folder)\", \"aliases\": )")
+          print(buf, "[")
+          if haskey(symlinks, folder)
+            for (i, al) in enumerate(symlinks[folder])
+              print(buf, "\"", al, "\"")
+              if i < length(symlinks[folder])
+                print(buf, ",")
+              end
             end
+          end
+          print(buf, "]}")
+          if j < length(entries)
+            print(buf, ",")
+          end
+          print(buf, "\n")
         end
-        println(buf, "var DOCUMENTER_NEWEST = \"$(newest)\";")
-        println(buf, "var DOCUMENTER_STABLE = \"$(first(entries))\";")
+        print(buf, "]")
+#        #println(buf, "var DOC_VERSIONS = [")
+#        #for folder in entries
+#        #    println(buf, "  \"", folder, "\",")
+#        #end
+#        #println(buf, "];")
+#
+#        # entries is empty if no versions have been built at all
+#        isempty(entries) && return
+#
+#        # The first element in entries corresponds to the latest version, but is usually not the full version
+#        # number. So this essentially follows the symlinks that will be generated to figure out the full
+#        # version number (stored in DOCUMENTER_CURRENT_VERSION in siteinfo.js).
+#        # Every symlink points to a directory, so this doesn't need to be recursive.
+#        newest = first(entries)
+#        for s in symlinks
+#            if s.first == newest
+#                newest = s.second
+#                break
+#            end
+#        end
+#        println(buf, "var DOCUMENTER_NEWEST = \"$(newest)\";")
+#        println(buf, "var DOCUMENTER_STABLE = \"$(first(entries))\";")
     end
 end
 
