@@ -5,6 +5,7 @@ function Documenter.Writers.HTMLWriter.generate_version_file(versionfile::Abstra
     @show entries
     @show symlinks
     open(versionfile, "w") do buf
+        symlinks = Dict(symlinks)
         isempty(entries) && return
         println(buf, "[")
         for (j, folder) in enumerate(entries)
