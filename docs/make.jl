@@ -133,7 +133,7 @@ ver = Pkg.dependencies()[Base.UUID("134bd445-31a3-41a2-a80b-1808f8bd43ea")]
     alias = "dev"
     cmd = `mike deploy $s $alias`
   else
-    @show ENV["RELEASE_VERSION"]
+    s = ENV["RELEASE_VERSION"]
     cmd = `mike deploy $s`
   end
   @show cmd
