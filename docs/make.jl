@@ -16,7 +16,7 @@ function Documenter.Writers.HTMLWriter.generate_version_file(versionfile::Abstra
           print(buf, "[")
           for (i, al) in enumerate([e for e in symlinks if e.first == folder])
             print(buf, "\"", al.second, "\"")
-            if i < lenth([e for e in symlinks if e.first == folder])
+            if i < length([e for e in symlinks if e.first == folder])
               print(buf, ", ")
             end
           end
