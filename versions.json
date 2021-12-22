@@ -1,5 +1,5 @@
 [
-{"version": "stable", "title": "stable", "aliases": ["v0.1.1"]},
-{"version": "v0.1", "title": "v0.1", "aliases": ["v0.1.1"]},
+{"version": "stable", "title": "stable", "aliases": ["v0.1.2"]},
+{"version": "v0.1", "title": "v0.1", "aliases": ["v0.1.2"]},
 {"version": "dev", "title": "dev", "aliases": []}
 ]
