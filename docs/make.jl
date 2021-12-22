@@ -1,6 +1,6 @@
 using Documenter, Docdoc, DocumenterMarkdown, Pkg
 
-function Documenter.generate_version_file(versionfile::AbstractString, entries, symlinks = [])
+function Documenter.Writers.HTMLWriter.generate_version_file(versionfile::AbstractString, entries, symlinks = [])
     @show "I am here"
     @show entries
     @show symlinks
